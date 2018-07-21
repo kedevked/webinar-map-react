@@ -1,0 +1,140 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.heading {
+  margin: 0;
+  text-align: center;
+  background-color: #9f8ef9;
+  padding: 0.5cm;
+}
+
+.map {
+  margin: 0;
+  width: 85%;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.text-input {
+  width: 15%;
+  background-color: darkslategray;
+  height: 100vh;
+}
+
+.text-input input {
+  width: 100%;
+  line-height: 0.8cm;
+  padding: 17px;
+  padding-left: 55px;
+  width: 300px;
+  border: 1px solid #f5f5f5;
+  font-size: 13px;
+  color: gray;
+  background-image: url('http://i47.tinypic.com/r02vbq.png');
+  background-repeat: no-repeat;
+  background-position: left center;
+  outline: 0;
+}
+
+.text-input ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.text-input li {
+  text-decoration: none;
+  border-bottom: 2px solid white;
+  color: white;
+  line-height: 2cm;
+}
+
+.menu {
+  display: none;
+}
+
+.error {
+  color: red;
+}
+
+@media screen and (max-width: 800px) {
+  .text-input-hidden {
+    display: none;
+  }
+
+  .text-input {
+    position: absolute;
+    width: 4.5cm;
+    z-index: 2;
+  }
+
+  .text-input input {
+    width: 2.55cm;
+  }
+
+  .menu {
+    display: block;
+    position: absolute;
+    top: 13px !important;
+  }
+
+  .hamburger-icon {
+    width: 45px;
+    fill: #E0E0E0;
+  }
+
+  .map {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .heading {
+    font-size: medium;
+    padding: 1em;
+  }
+
+  .menu {
+    top: 0!important;
+  }
+
+}
+
+li:focus {
+  background-color: #9f8ef9;
+}
+
+
