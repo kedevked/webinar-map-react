@@ -19,7 +19,7 @@ export default class MapContainer extends Component {
 
   componentDidMount() {
     this.loadMap()
-
+    this.onclickLocation()
   }
 
   loadMap() {
@@ -40,6 +40,22 @@ export default class MapContainer extends Component {
       this.addMarkers()
     }
 
+  }
+
+  onclickLocation = () => {
+    const that = this
+    const {infowindow} = this.state
+
+    const displayInfowindow = (e) => {
+      const {markers} = this.state
+      const markerInd = markers.findIndex(m => m.title.toLowerCase() === e.target.innerText.toLowerCase())
+      that.populateInfoWindow(markers[markerInd], infowindow)
+    }
+    document.querySelector('.locations-list').addEventListener('click', function (e) {
+      if(e.target && e.target.nodeName === "LI") {
+        displayInfowindow(e)
+      }
+    })
   }
 
   addMarkers = () => {
@@ -69,7 +85,7 @@ export default class MapContainer extends Component {
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker !== marker) {
       infowindow.marker = marker;
-      infowindow.setContent(`<h3>title</h3><h4>user likes it</h4>`);
+      infowindow.setContent(`<h3>${marker.title}</h3><h4>user likes it</h4>`);
       infowindow.open(this.map, marker);
       // Make sure the marker property is cleared if the infowindow is closed.
       infowindow.addListener('closeclick', function() {
@@ -84,7 +100,7 @@ export default class MapContainer extends Component {
       <div>
         <div className="container">
           <div className="text-input">
-            <ul className="location">{
+            <ul className="locations-list">{
               markers.map((m, i) =>
                 (<li key={i}>{m.title}</li>))
             }</ul>
