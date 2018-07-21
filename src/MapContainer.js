@@ -79,10 +79,15 @@ export default class MapContainer extends Component {
   }
 
   render() {
+    const {markers} = this.state
     return (
       <div>
         <div className="container">
-          <div className="sidebar text-input text-input-hidden">
+          <div className="text-input">
+            <ul className="location">{
+              markers.map((m, i) =>
+                (<li key={i}>{m.title}</li>))
+            }</ul>
           </div>
           <div role="application" className="map" ref="map">
             loading map...
