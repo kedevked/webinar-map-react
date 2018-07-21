@@ -48,7 +48,8 @@ export default class MapContainer extends Component {
 
     const displayInfowindow = (e) => {
       const {markers} = this.state
-      const markerInd = markers.findIndex(m => m.title.toLowerCase() === e.target.innerText.toLowerCase())
+      const markerInd =
+        markers.findIndex(m => m.title.toLowerCase() === e.target.innerText.toLowerCase())
       that.populateInfoWindow(markers[markerInd], infowindow)
     }
     document.querySelector('.locations-list').addEventListener('click', function (e) {
@@ -56,6 +57,10 @@ export default class MapContainer extends Component {
         displayInfowindow(e)
       }
     })
+  }
+
+  handleValueChange = (e) => {
+    this.setState({query: e.target.value})
   }
 
   addMarkers = () => {
@@ -95,13 +100,35 @@ export default class MapContainer extends Component {
   }
 
   render() {
-    const {markers} = this.state
+    const { locations, query, markers, infowindow} = this.state
+    if (query) {
+      locations.forEach((l,i) => {
+        if(l.name.toLowerCase().includes(query.toLowerCase())) {
+          markers[i].setVisible(true)
+        } else {
+          if (infowindow.marker === markers[i]){
+            // close the info window if marker removed
+            infowindow.close()
+          }
+          markers[i].setVisible(false)
+        }
+      })
+    } else {
+      locations.forEach((l,i) => {
+        if (markers.length && markers[i]) {
+          markers[i].setVisible(true)
+        }
+      })
+    }
     return (
       <div>
         <div className="container">
           <div className="text-input">
+            <input role="search" type='text'
+                   value={this.state.value}
+                   onChange={this.handleValueChange}/>
             <ul className="locations-list">{
-              markers.map((m, i) =>
+              markers.filter(m => m.getVisible()).map((m, i) =>
                 (<li key={i}>{m.title}</li>))
             }</ul>
           </div>
